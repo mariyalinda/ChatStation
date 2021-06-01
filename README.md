@@ -1,6 +1,6 @@
 # ChatStation
 
-A Real Time Chat Application using MEAN Stack Application with User Specific Features
+A Real Time Chat Application using MEAN Stack with User Specific Features
 
 ## Development server
 
