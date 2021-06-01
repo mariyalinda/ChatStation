@@ -1,0 +1,85 @@
+* {
+  box-sizing: border-box;
+}
+#container {
+  width: 100%;
+  height: 100%;
+  background: #eff3f7;
+  margin: 0 auto;
+  overflow: hidden;
+}
+main {
+  width: 100%;
+  height: 100%;
+  background-color: #ecb390;
+  display: inline-block;
+  vertical-align: top;
+}
+
+main header {
+  padding: 30px 20px;
+}
+main input {
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  padding: 0 50px 0 20px;
+  background-color: #df7861;
+  border: none;
+  border-radius: 3px;
+  color: #fff;
+  background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_search.png);
+  background-repeat: no-repeat;
+  background-position: 1100px;
+  background-size: 40px;
+}
+main input::placeholder {
+  color: #fff;
+}
+main ul {
+  padding-left: 0;
+  margin: 30px;
+  list-style-type: none;
+  height: 100%;
+}
+main li {
+  padding: 10px 0;
+}
+main li:hover {
+  background-color: #df7861;
+}
+
+main li a,
+a:hover {
+  text-decoration: none;
+  transition: all 0.3s;
+  display: block;
+}
+main li h5 {
+  color: #fff;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+main li h6 {
+  color: #fcf8e8;
+  font-weight: normal;
+}
+
+.status {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 7px;
+}
+.green {
+  background-color: #58b666;
+}
+.orange {
+  background-color: #ff725d;
+}
+.blue {
+  background-color: #6fbced;
+  margin-right: 0;
+  margin-left: 7px;
+}

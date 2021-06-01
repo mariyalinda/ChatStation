@@ -1,0 +1,21 @@
+.main {
+  background-color: #ecb390;
+  position: fixed;
+  padding: 0;
+  margin: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.fas {
+  margin: 10%;
+  color: #fcf8e8;
+}
+.btn {
+  background-color: #df7861;
+  color: white;
+}
+#btn-container {
+  text-align: center;
+}

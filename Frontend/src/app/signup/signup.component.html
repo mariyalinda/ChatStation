@@ -1,0 +1,86 @@
+<div id="main">
+  <app-navbar-welcome></app-navbar-welcome>
+  <!-- form starts here -->
+  <div class="row">
+    <div class="col-lg-4"></div>
+    <div class="col-lg-4" style="margin-top: 2%; margin-bottom: 2%">
+      <div id="transbox" class="rounded">
+        <h2 style="text-align: center">New here?</h2>
+        <h6>Create a unique username to get started!</h6>
+        <br />
+        <form #signup="ngForm" (ngSubmit)="signupUser()">
+          <div class="form-row">
+            <label for="inputUser" style="font-weight: bold">Username</label>
+            <input
+              type="text"
+              class="form-control"
+              name="uname"
+              placeholder="Create your username"
+              [(ngModel)]="user.uname"
+              minlength="3"
+              #username="ngModel"
+              [class.is-invalid]="username.invalid && username.touched"
+              required
+            />
+            <small
+              class="text-danger"
+              [class.d-none]="username.valid || username.untouched"
+              >Username must be unique!</small
+            >
+          </div>
+          <div class="form-row">
+            <label for="email" style="font-weight: bold">Email</label>
+            <input
+              type="email"
+              pattern="^([A-Za-z0-9\.-]+)@([A-Za-z0-9\-]+)\.([a-z]{2,3})(.[a-z]{2,3})?$"
+              class="form-control"
+              placeholder="Enter your email-id"
+              name="email"
+              #email="ngModel"
+              [class.is-invalid]="email.invalid && email.touched"
+              [(ngModel)]="user.email"
+              required
+            />
+            <small
+              class="text-danger"
+              [class.d-none]="email.valid || email.untouched"
+              >Enter a valid email id!</small
+            >
+          </div>
+          <div class="form-row">
+            <label for="inputUser" style="font-weight: bold">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              placeholder="Create a strong password"
+              pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+              #pw="ngModel"
+              [class.is-invalid]="pw.invalid && pw.touched"
+              [(ngModel)]="user.pw"
+              name="pw"
+              required
+            />
+            <small class="text-danger" [class.d-none]="pw.valid || pw.untouched"
+              >Must have atleast 8 characters,including a letter and a
+              number!</small
+            >
+          </div>
+          <br />
+          <div class="text-center">
+            <button
+              id="submit"
+              type="submit"
+              class="btn btn-warning"
+              style="font-weight: bolder"
+              [disabled]="signup.form.invalid"
+            >
+              Submit!
+            </button>
+          </div>
+        </form>
+        <!-- form ends here -->
+      </div>
+    </div>
+    <div class="col-lg-4"></div>
+  </div>
+</div>
