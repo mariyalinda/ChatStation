@@ -25,7 +25,7 @@ export class SignupComponent implements OnInit {
       },
       (err) => {
         alert(`Entered details are not unique!`);
-        this._router.navigate(['/']);
+        this._router.navigate(['/signup']);
       }
     );
   }

@@ -52,8 +52,8 @@
             max="50"
             class="form-control"
             [(ngModel)]="grp.memno"
+            (change)="setNum($event)"
             #memno="ngModel"
-            (change)="changemem(memno.value)"
             required
           />
         </div>
@@ -68,7 +68,6 @@
                 minlength="3"
                 #mem="ngModel"
                 [(ngModel)]="grp.members[i]"
-                name="mem"
                 [class.is-invalid]="mem.invalid && mem.touched"
                 required
               />

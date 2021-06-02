@@ -12,14 +12,11 @@ export class AddgrpComponent implements OnInit {
   grp = {
     name: '',
     des: '',
-    memno: 5,
+    memno: 0,
     members: [],
   };
   numbers: Array<any> = [];
-  constructor(private router: Router, private grpservice: GrpService) {
-    this.numbers = Array.from({ length: this.grp.memno }, (v, k) => k + 1);
-    console.log(this.grp.memno);
-  }
+  constructor(private router: Router, private grpservice: GrpService) {}
 
   ngOnInit(): void {}
   // $(document).ready(function () {
@@ -33,8 +30,9 @@ export class AddgrpComponent implements OnInit {
     alert('Success!');
     this.router.navigate(['/groups']);
   }
-  changemem(num: number) {
-    this.grp.memno = num;
+  setNum(event) {
+    this.grp.memno = event.target.value;
+    this.numbers = Array.from({ length: this.grp.memno }, (v, k) => k);
     console.log(this.grp.memno);
   }
 }

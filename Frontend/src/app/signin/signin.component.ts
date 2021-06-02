@@ -24,7 +24,7 @@ export class SigninComponent implements OnInit {
       },
       (err) => {
         alert(`User does not exist!`);
-        this._router.navigate(['/']);
+        this._router.navigate(['/signin']);
       }
     );
   }
