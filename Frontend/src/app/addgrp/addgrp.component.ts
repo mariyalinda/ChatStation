@@ -19,12 +19,6 @@ export class AddgrpComponent implements OnInit {
   constructor(private router: Router, private grpservice: GrpService) {}
 
   ngOnInit(): void {}
-  // $(document).ready(function () {
-  //   $(document).on('change', '#num', function () {
-  //     this.grp.memno = $('#num').val();
-  //     console.log(this.grp.memno);
-  //   });
-  // });
   addgrp() {
     this.grpservice.newGroup(this.grp);
     alert('Success!');
@@ -33,6 +27,5 @@ export class AddgrpComponent implements OnInit {
   setNum(event) {
     this.grp.memno = event.target.value;
     this.numbers = Array.from({ length: this.grp.memno }, (v, k) => k);
-    console.log(this.grp.memno);
   }
 }
