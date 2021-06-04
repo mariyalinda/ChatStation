@@ -19,13 +19,13 @@ export class AddgrpComponent implements OnInit {
   constructor(private router: Router, private grpservice: GrpService) {}
 
   ngOnInit(): void {}
-  addgrp() {
-    this.grpservice.newGroup(this.grp);
-    alert('Success!');
-    this.router.navigate(['/groups']);
-  }
   setNum(event) {
     this.grp.memno = event.target.value;
     this.numbers = Array.from({ length: this.grp.memno }, (v, k) => k);
+  }
+  addgrp() {
+    this.grpservice.newGroup(this.grp);
+    alert(`Created group ${this.grp.name}!`);
+    this.router.navigate(['/groups']);
   }
 }

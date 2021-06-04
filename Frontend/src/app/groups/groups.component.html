@@ -5,54 +5,9 @@
       <input type="text" placeholder="Search" />
     </header>
     <ul>
-      <li>
+      <li *ngFor="let group of grps">
         <a routerLink="/group1">
-          <h5>MBCET CS-2</h5>
-          <h6>
-            <span class="status orange"></span>
-            offline
-          </h6>
-        </a>
-      </li>
-      <li>
-        <a routerLink="/group2">
-          <h5>Bday on 31st</h5>
-          <h6>
-            <span class="status green"></span>
-            online
-          </h6>
-        </a>
-      </li>
-      <li>
-        <a routerLink="#">
-          <h5>Tech Ninjas</h5>
-          <h6>
-            <span class="status orange"></span>
-            offline
-          </h6>
-        </a>
-      </li>
-      <li>
-        <a routerLink="#">
-          <h5>Painting class</h5>
-          <h6>
-            <span class="status green"></span>
-            online
-          </h6>
-        </a>
-      </li>
-      <li>
-        <a routerLink="#">
-          <h5>Neighbours group</h5>
-          <h6>
-            <span class="status green"></span>
-            online
-          </h6>
-        </a>
-      </li>
-      <li>
-        <a routerLink="#">
-          <h5>Besties</h5>
+          <h5>{{ group.name }}</h5>
           <h6>
             <span class="status orange"></span>
             offline

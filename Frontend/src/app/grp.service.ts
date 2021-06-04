@@ -5,13 +5,16 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class GrpService {
-  group: {
-    name: '';
-    des: '';
-    memno: 0;
-    members: [];
+  grp = {
+    name: '',
+    des: '',
+    memno: 0,
+    members: [],
   };
   constructor(private http: HttpClient) {}
+  getGroups() {
+    return this.http.get('http://localhost:5000/groups');
+  }
   newGroup(grp: any) {
     return this.http
       .post('http://localhost:5000/addgrp', { group: grp })

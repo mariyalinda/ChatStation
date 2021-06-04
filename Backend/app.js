@@ -18,6 +18,12 @@ app.get("/user/:username", (req, res) => {
     res.send(user);
   });
 });
+app.get("/groups", (req, res) => {
+  Grpdata.find().then(function (groups) {
+    res.send(groups);
+  });
+});
+
 function verifyToken(req, res, next) {
   if (!req.headers.authorization) {
     return res.status(401).send("Unauthorized request");

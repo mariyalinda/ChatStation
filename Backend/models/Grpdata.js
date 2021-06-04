@@ -10,10 +10,10 @@ mongoose.connect(
 const Schema = mongoose.Schema;
 //constructor
 const grpSchema = new Schema({
-  name: { type: String, unique: true },
-  description: String,
+  name: String,
+  des: String,
   memno: Number,
-  members: [{ name: String }],
+  members: [],
 });
 
 //model creation
