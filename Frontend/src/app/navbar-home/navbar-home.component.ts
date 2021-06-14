@@ -13,6 +13,7 @@ export class NavbarHomeComponent implements OnInit {
   ngOnInit(): void {}
   logOutUser() {
     localStorage.removeItem('token');
+    localStorage.removeItem('userid');
     this._router.navigate(['/']);
   }
 }

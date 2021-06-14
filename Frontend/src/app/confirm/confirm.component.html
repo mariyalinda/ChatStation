@@ -1,0 +1,32 @@
+<div id="main">
+  <!-- form starts here -->
+  <div class="row">
+    <div class="col-lg-4"></div>
+    <div class="col-lg-4" style="margin-top: 15%; margin-bottom: 2%">
+      <div id="transbox" class="rounded">
+        <h2 style="text-align: center">
+          <i class="fas fa-exclamation-triangle"></i>
+        </h2>
+        <h6>
+          Are you sure you want to {{ action }} your contact
+          {{ viewed_user.username }}?
+        </h6>
+        <br />
+        <form>
+          <div class="form-row">
+            <button (click)="reject()" class="btn btn-light">No</button>
+            <button
+              (click)="confirmUser()"
+              style="float: right"
+              class="btn btn-light"
+            >
+              Yes!
+            </button>
+          </div>
+        </form>
+        <!-- form ends here -->
+      </div>
+    </div>
+    <div class="col-lg-4"></div>
+  </div>
+</div>

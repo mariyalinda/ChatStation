@@ -20,6 +20,7 @@ export class SigninComponent implements OnInit {
       (res) => {
         alert(`Welcome back ${this.user.uname}!`);
         localStorage.setItem('token', res.token);
+        localStorage.setItem('userid', res.id);
         this._router.navigate(['/home']);
       },
       (err) => {

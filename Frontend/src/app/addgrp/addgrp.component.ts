@@ -9,7 +9,7 @@ declare var $: any;
   styleUrls: ['./addgrp.component.css'],
 })
 export class AddgrpComponent implements OnInit {
-  grp = {
+  group = {
     name: '',
     des: '',
     memno: 0,
@@ -20,12 +20,19 @@ export class AddgrpComponent implements OnInit {
 
   ngOnInit(): void {}
   setNum(event) {
-    this.grp.memno = event.target.value;
-    this.numbers = Array.from({ length: this.grp.memno }, (v, k) => k);
+    this.group.memno = event.target.value;
+    this.numbers = Array.from({ length: this.group.memno }, (v, k) => k);
   }
   addgrp() {
-    this.grpservice.newGroup(this.grp);
-    alert(`Created group ${this.grp.name}!`);
-    this.router.navigate(['/groups']);
+    this.grpservice.newGroup(this.group).subscribe(
+      (group) => {
+        alert(`Created group ${this.group.name}`);
+        this.router.navigate(['/groups']);
+      },
+      (err) => {
+        alert(`Entered details are not unique!`);
+        console.log(err);
+      }
+    );
   }
 }

@@ -15,11 +15,12 @@ import { AuthService } from './auth.service';
 import { TokenInterceptorService } from './token-interceptor.service';
 import { UserService } from './user.service';
 import { Group1Component } from './group1/group1.component';
-import { Group2Component } from './group2/group2.component';
 import { GroupsComponent } from './groups/groups.component';
 import { User1Component } from './user1/user1.component';
-import { User2Component } from './user2/user2.component';
 import { AddgrpComponent } from './addgrp/addgrp.component';
+import { UserprofileComponent } from './userprofile/userprofile.component';
+import { GrpService } from './grp.service';
+import { ConfirmComponent } from './confirm/confirm.component';
 
 @NgModule({
   declarations: [
@@ -31,15 +32,16 @@ import { AddgrpComponent } from './addgrp/addgrp.component';
     HomeComponent,
     NavbarHomeComponent,
     Group1Component,
-    Group2Component,
     GroupsComponent,
     User1Component,
-    User2Component,
     AddgrpComponent,
+    UserprofileComponent,
+    ConfirmComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [
     AuthService,
+    GrpService,
     UserService,
     {
       provide: HTTP_INTERCEPTORS,

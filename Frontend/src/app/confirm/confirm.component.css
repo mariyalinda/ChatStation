@@ -1,0 +1,27 @@
+#main {
+  background-color: #ecb390;
+  position: fixed;
+  padding: 0;
+  margin: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+}
+h6 {
+  text-align: center;
+}
+.fas {
+  color: #df7861;
+}
+.btn {
+  color: #df7861;
+}
+
+#transbox {
+  background-color: #ffffff;
+  opacity: 0.8;
+  padding: 20px;
+  box-shadow: 10px 10px rgba(0, 0, 0, 0.2);
+}

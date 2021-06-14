@@ -10,7 +10,20 @@ export class UserService {
     email: '',
   };
   constructor(private http: HttpClient) {}
-  getUser(username: any) {
-    return this.http.get('http://localhost:5000/user/' + username);
+  getUsers() {
+    return this.http.get('http://localhost:5000/users');
+  }
+  getUser(id) {
+    return this.http.get('http://localhost:5000/user/' + id);
+  }
+  blockUser(currentuser_id, vieweduser_id) {
+    return this.http.get(
+      'http://localhost:5000/user/' + currentuser_id + '/block/' + vieweduser_id
+    );
+  }
+  muteUser(currentuser_id, vieweduser_id) {
+    return this.http.get(
+      'http://localhost:5000/user/' + currentuser_id + '/mute/' + vieweduser_id
+    );
   }
 }

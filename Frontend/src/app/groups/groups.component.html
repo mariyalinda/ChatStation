@@ -6,11 +6,11 @@
     </header>
     <ul>
       <li *ngFor="let group of grps">
-        <a routerLink="/group1">
+        <a [routerLink]="[group._id]">
           <h5>{{ group.name }}</h5>
           <h6>
             <span class="status orange"></span>
-            offline
+            Last message
           </h6>
         </a>
       </li>

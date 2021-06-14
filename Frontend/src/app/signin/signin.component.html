@@ -32,7 +32,7 @@
             <input
               type="password"
               class="form-control"
-              pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+              pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d].{8,}$"
               #pw="ngModel"
               [class.is-invalid]="pw.invalid && pw.touched"
               [(ngModel)]="user.pw"

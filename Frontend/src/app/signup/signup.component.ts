@@ -21,6 +21,7 @@ export class SignupComponent implements OnInit {
       (res) => {
         alert(`Welcome aboard ${this.user.uname}!`);
         localStorage.setItem('token', res.token);
+        localStorage.setItem('userid', res.id);
         this._router.navigate(['/home']);
       },
       (err) => {

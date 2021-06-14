@@ -16,7 +16,7 @@
             minlength="3"
             class="form-control"
             #name="ngModel"
-            [(ngModel)]="grp.name"
+            [(ngModel)]="group.name"
             required
           />
           <small
@@ -31,7 +31,7 @@
             type="text"
             class="form-control"
             name="des"
-            [(ngModel)]="grp.des"
+            [(ngModel)]="group.des"
             minlength="5"
             maxlength="100"
             #des="ngModel"
@@ -51,7 +51,7 @@
             min="2"
             max="50"
             class="form-control"
-            [(ngModel)]="grp.memno"
+            [(ngModel)]="group.memno"
             (change)="setNum($event)"
             #memno="ngModel"
             required
@@ -67,7 +67,7 @@
                 class="form-control"
                 minlength="3"
                 #mem="ngModel"
-                [(ngModel)]="grp.members[i]"
+                [(ngModel)]="group.members[i]"
                 [class.is-invalid]="mem.invalid && mem.touched"
                 required
               />

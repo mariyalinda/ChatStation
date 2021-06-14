@@ -53,7 +53,7 @@
               type="password"
               class="form-control"
               placeholder="Create a strong password"
-              pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+              pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d].{8,}$"
               #pw="ngModel"
               [class.is-invalid]="pw.invalid && pw.touched"
               [(ngModel)]="user.pw"
@@ -61,8 +61,8 @@
               required
             />
             <small class="text-danger" [class.d-none]="pw.valid || pw.untouched"
-              >Must have atleast 8 characters,including a letter and a
-              number!</small
+              >Must have atleast 8 characters,including a letter, a number and a
+              special character!</small
             >
           </div>
           <br />
