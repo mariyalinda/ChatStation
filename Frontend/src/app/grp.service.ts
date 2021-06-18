@@ -5,12 +5,6 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class GrpService {
-  // grp = {
-  //   name: '',
-  //   des: '',
-  //   memno: 0,
-  //   members: [],
-  // };
   constructor(private http: HttpClient) {}
   getGroups() {
     return this.http.get('http://localhost:5000/groups');
@@ -21,5 +15,15 @@ export class GrpService {
   }
   getGroup(id) {
     return this.http.get('http://localhost:5000/groups/' + id);
+  }
+  getMessages(grpid) {
+    return this.http.get('http://localhost:5000/groups/msg/' + grpid);
+  }
+  newMessage(grpid, message) {
+    return this.http
+      .post('http://localhost:5000/groups/' + grpid + '/addmsg', message)
+      .subscribe((data) => {
+        console.log(data);
+      });
   }
 }

@@ -6,13 +6,15 @@
     </header>
     <ul>
       <li *ngFor="let user of users">
-        <a [routerLink]="[user._id]">
-          <h5>{{ user.username }}</h5>
-          <h6>
-            <span class="status orange"></span>
-            {{ user.status }}
-          </h6>
-        </a>
+        <div *ngIf="!(user._id == current_id)">
+          <a [routerLink]="[user._id]">
+            <h5>{{ user.username }}</h5>
+            <h6>
+              <span class="status orange"></span>
+              {{ user.status }}
+            </h6>
+          </a>
+        </div>
       </li>
     </ul>
   </main>

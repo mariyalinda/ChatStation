@@ -1,7 +1,23 @@
 const express = require("express");
 const Userdata = require("./models/Userdata");
 const Grpdata = require("./models/Grpdata");
+const Msgdata = require("./models/Msgdata");
 const app = new express();
+//socket
+const {
+  userJoin,
+  getCurrentUser,
+  userLeave,
+  getRoomUsers,
+} = require("./utils/users");
+var http = require("http").createServer(app);
+var io = require("socket.io")(http, {
+  cors: {
+    origin: "*",
+    methods: "*",
+  },
+});
+// end of socket imports
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
 app.use(cors());
@@ -13,6 +29,65 @@ app.use(
   })
 );
 
+//socket
+const bot = "ChatStation bot";
+const formatMessage = require("./utils/message");
+
+// Run when client connects
+io.on("connection", (socket) => {
+  socket.on("joinRoom", (grpuser) => {
+    console.log(grpuser);
+    user = {
+      id: socket.id,
+      username: grpuser.username,
+      room: grpuser.room,
+    };
+    userJoin(user);
+    socket.join(user.room);
+
+    // Welcome current user
+    socket.emit("message", formatMessage(bot, "Welcome to ChatCord!"));
+
+    // Broadcast when a user connects
+    socket.broadcast
+      .to(user.room)
+      .emit(
+        "message",
+        formatMessage(bot, `${user.username} has joined the chat`)
+      );
+
+    // Send users and room info
+    io.to(user.room).emit("roomUsers", {
+      room: user.room,
+      users: getRoomUsers(user.room),
+    });
+  });
+
+  // Listen for chatMessage
+  socket.on("chatMessage", (msg) => {
+    const user = getCurrentUser(socket.id);
+
+    io.to(user.room).emit("message", formatMessage(user.username, msg));
+  });
+
+  // Runs when client disconnects
+  socket.on("disconnect", () => {
+    const user = userLeave(socket.id);
+
+    if (user) {
+      io.to(user.room).emit(
+        "message",
+        formatMessage(bot, `${user.username} has left the chat`)
+      );
+
+      // Send users and room info
+      io.to(user.room).emit("roomUsers", {
+        room: user.room,
+        users: getRoomUsers(user.room),
+      });
+    }
+  });
+});
 //GET REQUESTS
 app.get("/user/:id", (req, res) => {
   const userid = req.params.id;
@@ -24,6 +99,12 @@ app.get("/groups/:id", (req, res) => {
   const grpid = req.params.id;
   Grpdata.findOne({ _id: grpid }).then((group) => {
     res.send(group);
+  });
+});
+app.get("/groups/msg/:id", (req, res) => {
+  const grpid = req.params.id;
+  Msgdata.findOne({ groupid: grpid }).then((grpchat) => {
+    res.send(grpchat);
   });
 });
 app.get("/groups", (req, res) => {
@@ -148,6 +229,18 @@ app.post("/addgrp", verifyToken, function (req, res) {
   group
     .save()
     .then(function () {
+      var grpchat = {
+        messages: [
+          {
+            sender: "ChatStation bot",
+            time: "00:00",
+            text: "New group",
+          },
+        ],
+        groupid: group._id,
+      };
+      var grpchat = new Msgdata(grpchat);
+      grpchat.save();
       res.status(200).send(group);
     })
     .catch(function (error) {
@@ -155,6 +248,23 @@ app.post("/addgrp", verifyToken, function (req, res) {
       res.status(401).send(error);
     });
 });
-app.listen(5000, function () {
+app.post("/groups/:id/addmsg", function (req, res) {
+  var grpid = req.params.id;
+  grpid.toString();
+  var message = {
+    text: req.body.text,
+    sender: req.body.sender,
+    time: req.body.time,
+  };
+  Msgdata.findOne({ groupid: grpid })
+    .then(function (grpchat) {
+      grpchat.messages.push(message);
+      grpchat.save();
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
+});
+http.listen(5000, function () {
   console.log("Listening on port", 5000);
 });

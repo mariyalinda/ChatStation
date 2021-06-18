@@ -86,6 +86,7 @@ a[aria-expanded="true"] {
 }
 
 .chat-messages .message .meta span {
+  margin-left: 10px;
   color: #777;
 }
 

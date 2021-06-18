@@ -13,10 +13,11 @@ export class HomeComponent implements OnInit {
       status: '',
     },
   ];
-
+  current_id = '';
   constructor(public userservice: UserService) {}
 
   ngOnInit(): void {
+    this.current_id = localStorage.getItem('userid');
     this.userservice.getUsers().subscribe((data) => {
       this.users = JSON.parse(JSON.stringify(data));
       this.users.forEach((user) => {
