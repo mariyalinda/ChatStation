@@ -167,14 +167,12 @@ app.get("/user/:id1/unblock/:id2", (req, res) => {
   const currentuser_id = req.params.id1;
   const vieweduser_id = req.params.id2;
   const curr_id = mongoose.Types.ObjectId(currentuser_id);
-  Userdata.findByIdAndUpdate(
-    curr_id,
-    { new: true },
-    {
-      $pull: { blocked: { id: vieweduser_id } },
-    }
-  )
+  Userdata.findById(curr_id)
     .then(function (currentuser) {
+      var result = currentuser.blocked.filter(
+        (user) => user.id != vieweduser_id
+      );
+      currentuser.blocked = result;
       currentuser.save();
       res.send({ currentuser: currentuser });
     })
@@ -186,12 +184,10 @@ app.get("/user/:id1/unmute/:id2", (req, res) => {
   const currentuser_id = req.params.id1;
   const vieweduser_id = req.params.id2;
   const curr_id = mongoose.Types.ObjectId(currentuser_id);
-  Userdata.findByIdAndUpdate(
-    curr_id,
-    { new: true },
-    { $pull: { muted: { id: vieweduser_id } } }
-  )
+  Userdata.findById(curr_id)
     .then(function (currentuser) {
+      var result = currentuser.muted.filter((user) => user.id != vieweduser_id);
+      currentuser.muted = result;
       currentuser.save();
       res.send({ currentuser: currentuser });
     })
