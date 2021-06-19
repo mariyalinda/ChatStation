@@ -11,23 +11,49 @@ const SOCKET_ENDPOINT = 'localhost:5000';
   encapsulation: ViewEncapsulation.None,
 })
 export class User1Component implements OnInit {
-  user = {
+  viewed_user = {
     username: '',
     email: '',
     status: 'offline',
   };
+  current_user = {
+    username: '',
+    email: '',
+    status: 'offline',
+    blocked: [],
+    muted: [],
+  };
   viewed_id = '';
   current_id = '';
+  isBlocked = false;
+  isMuted = false;
   socket;
 
   constructor(private route: ActivatedRoute, public userservice: UserService) {}
 
   ngOnInit(): void {
+    this.isBlocked = false;
+    this.isMuted = false;
     this.setupSocketConnection();
     this.viewed_id = this.route.snapshot.params['id'];
     this.current_id = localStorage.getItem('userid');
     this.userservice.getUser(this.viewed_id).subscribe((data) => {
-      this.user = JSON.parse(JSON.stringify(data));
+      this.viewed_user = JSON.parse(JSON.stringify(data));
+    });
+    this.userservice.getUser(this.current_id).subscribe((data) => {
+      this.current_user = JSON.parse(JSON.stringify(data));
+      this.current_user.blocked.forEach((person) => {
+        console.log('yes');
+        if (person.id == this.viewed_id) {
+          this.isBlocked = true;
+        }
+      });
+      this.current_user.muted.forEach((person) => {
+        console.log('yes');
+        if (person.id == this.viewed_id) {
+          this.isMuted = true;
+        }
+      });
     });
   }
   setupSocketConnection() {

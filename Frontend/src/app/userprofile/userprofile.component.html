@@ -3,7 +3,7 @@
   <div class="table-responsive row">
     <div class="col-lg-2"></div>
     <div class="col-lg-8" style="margin-top: 2%; margin-bottom: 2%">
-      <a routerLink="#" (click)="reload()">
+      <a [routerLink]="" (click)="reload()">
         <h1 style="text-align: center">
           <i class="fa fa-user fa-5x" aria-hidden="true"> </i>
         </h1>
@@ -42,26 +42,20 @@
         </tbody>
       </table>
       <div>
-        <button
-          *ngIf="!(viewed_id == current_id)"
-          [routerLink]="['/home', viewed_id]"
-          class="btn btn-light"
-        >
+        <button [routerLink]="['/home', viewed_id]" class="btn btn-light">
           Message
         </button>
-        <button
-          *ngIf="!(viewed_id == current_id)"
-          (click)="blockUser()"
-          class="btn btn-light"
-        >
+        <button *ngIf="!isBlocked" (click)="blockUser()" class="btn btn-light">
           Block
         </button>
-        <button
-          (click)="muteUser()"
-          *ngIf="!(viewed_id == current_id)"
-          class="btn btn-light"
-        >
+        <button *ngIf="isBlocked" (click)="unblockUser()" class="btn btn-light">
+          Unblock
+        </button>
+        <button *ngIf="!isMuted" (click)="muteUser()" class="btn btn-light">
           Mute
+        </button>
+        <button *ngIf="isMuted" (click)="unmuteUser()" class="btn btn-light">
+          Unmute
         </button>
       </div>
     </div>

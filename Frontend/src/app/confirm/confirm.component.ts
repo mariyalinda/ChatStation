@@ -37,6 +37,14 @@ export class ConfirmComponent implements OnInit {
       this._router.navigateByUrl(
         'home/' + this.vieweduser_id + '/view/mute/true'
       );
+    } else if (this.action == 'unblock') {
+      this._router.navigateByUrl(
+        'home/' + this.vieweduser_id + '/view/block/false'
+      );
+    } else if (this.action == 'unmute') {
+      this._router.navigateByUrl(
+        'home/' + this.vieweduser_id + '/view/mute/false'
+      );
     }
   }
   reject() {

@@ -3,7 +3,8 @@ const mongoose = require("mongoose");
 //database connection
 mongoose.connect(
   "mongodb+srv://userone:userone@fsdfiles.ljhxf.mongodb.net/ChatDB?retryWrites=true&w=majority",
-  { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }
+  { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true },
+  { useFindAndModify: false }
 );
 
 //schema definition

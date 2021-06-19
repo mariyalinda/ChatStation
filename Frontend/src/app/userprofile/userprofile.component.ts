@@ -57,6 +57,23 @@ export class UserprofileComponent implements OnInit {
             this.current_user = JSON.parse(JSON.stringify(data));
           });
       }
+    } else if (this.route.snapshot.url[4].path == 'false') {
+      if (this.route.snapshot.url[3].path == 'block') {
+        this.isBlocked = false;
+        this.userservice
+          .unblockUser(this.current_id, this.viewed_id)
+          .subscribe((data) => {
+            this.current_user = JSON.parse(JSON.stringify(data));
+          });
+      }
+      if (this.route.snapshot.url[3].path == 'mute') {
+        this.isMuted = false;
+        this.userservice
+          .unmuteUser(this.current_id, this.viewed_id)
+          .subscribe((data) => {
+            this.current_user = JSON.parse(JSON.stringify(data));
+          });
+      }
     }
   }
 
@@ -65,6 +82,12 @@ export class UserprofileComponent implements OnInit {
   }
   muteUser() {
     this._router.navigateByUrl('/home/' + this.viewed_id + '/view/mute');
+  }
+  unblockUser() {
+    this._router.navigateByUrl('/home/' + this.viewed_id + '/view/unblock');
+  }
+  unmuteUser() {
+    this._router.navigateByUrl('/home/' + this.viewed_id + '/view/unmute');
   }
   reload() {
     this.current_user.blocked.forEach((person) => {

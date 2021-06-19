@@ -34,12 +34,32 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
+    path: 'home/:id/view/block/false',
+    component: UserprofileComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: 'home/:id/view/mute/false',
+    component: UserprofileComponent,
+    pathMatch: 'full',
+  },
+  {
     path: 'home/:id/view/block',
     component: ConfirmComponent,
     pathMatch: 'full',
   },
   {
     path: 'home/:id/view/mute',
+    component: ConfirmComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: 'home/:id/view/unblock',
+    component: ConfirmComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: 'home/:id/view/unmute',
     component: ConfirmComponent,
     pathMatch: 'full',
   },

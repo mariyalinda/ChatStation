@@ -26,4 +26,20 @@ export class UserService {
       'http://localhost:5000/user/' + currentuser_id + '/mute/' + vieweduser_id
     );
   }
+  unblockUser(currentuser_id, vieweduser_id) {
+    return this.http.get(
+      'http://localhost:5000/user/' +
+        currentuser_id +
+        '/unblock/' +
+        vieweduser_id
+    );
+  }
+  unmuteUser(currentuser_id, vieweduser_id) {
+    return this.http.get(
+      'http://localhost:5000/user/' +
+        currentuser_id +
+        '/unmute/' +
+        vieweduser_id
+    );
+  }
 }
