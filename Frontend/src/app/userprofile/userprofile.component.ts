@@ -32,6 +32,8 @@ export class UserprofileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isBlocked = false;
+    this.isMuted = false;
     this.viewed_id = this.route.snapshot.params['id'];
     this.userservice.getUser(this.viewed_id).subscribe((data) => {
       this.viewed_user = JSON.parse(JSON.stringify(data));

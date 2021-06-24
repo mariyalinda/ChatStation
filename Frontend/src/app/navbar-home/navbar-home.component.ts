@@ -11,6 +11,10 @@ export class NavbarHomeComponent implements OnInit {
   constructor(private _router: Router, public _auth: AuthService) {}
 
   ngOnInit(): void {}
+  viewProfile() {
+    var id = localStorage.getItem('userid');
+    this._router.navigateByUrl('/home/' + id + '/view/account');
+  }
   logOutUser() {
     localStorage.removeItem('token');
     localStorage.removeItem('userid');

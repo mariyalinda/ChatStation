@@ -11,6 +11,7 @@ import { User1Component } from './user1/user1.component';
 import { AddgrpComponent } from './addgrp/addgrp.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
 import { ConfirmComponent } from './confirm/confirm.component';
+import { UseraccountComponent } from './useraccount/useraccount.component';
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -21,6 +22,11 @@ const routes: Routes = [
   {
     path: 'home/:id/view/profile/default',
     component: UserprofileComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: 'home/:id/view/account',
+    component: UseraccountComponent,
     pathMatch: 'full',
   },
   {

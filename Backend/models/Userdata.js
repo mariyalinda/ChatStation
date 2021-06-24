@@ -27,6 +27,12 @@ const userSchema = new Schema({
       id: mongoose.Schema.Types.ObjectId,
     },
   ],
+  groups: [
+    {
+      name: String,
+      id: mongoose.Schema.Types.ObjectId,
+    },
+  ],
 });
 //model creation
 var Userdata = mongoose.model("userdata", userSchema);

@@ -1,0 +1,50 @@
+<div id="main">
+  <app-navbar-home></app-navbar-home>
+  <div class="table-responsive row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8" style="margin-top: 2%; margin-bottom: 2%">
+      <h1 style="text-align: center">
+        <i class="fa fa-user fa-5x" aria-hidden="true"> </i>
+      </h1>
+      <h3 style="text-align: center">
+        {{ current_user.username }}
+      </h3>
+      <table class="table">
+        <tbody>
+          <tr>
+            <td><label>Email</label></td>
+            <td>
+              <label>{{ current_user.email }}</label>
+            </td>
+          </tr>
+          <tr>
+            <td><label>Password</label></td>
+            <td>
+              <label>{{ current_user.password }}</label>
+            </td>
+          </tr>
+          <tr>
+            <td><label>Blocked</label></td>
+            <td class="list">
+              <ul *ngFor="let user of current_user.blocked">
+                <li>{{ user.username }}</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td><label>Muted</label></td>
+            <td class="list">
+              <ul *ngFor="let user of current_user.muted">
+                <li>{{ user.username }}</li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-lg-2"></div>
+  </div>
+  <div id="button-div">
+    <button class="btn btn-light">Change password</button>
+  </div>
+</div>

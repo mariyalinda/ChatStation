@@ -21,6 +21,7 @@ import { AddgrpComponent } from './addgrp/addgrp.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
 import { GrpService } from './grp.service';
 import { ConfirmComponent } from './confirm/confirm.component';
+import { UseraccountComponent } from './useraccount/useraccount.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { ConfirmComponent } from './confirm/confirm.component';
     AddgrpComponent,
     UserprofileComponent,
     ConfirmComponent,
+    UseraccountComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [

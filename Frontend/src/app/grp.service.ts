@@ -6,8 +6,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class GrpService {
   constructor(private http: HttpClient) {}
-  getGroups() {
-    return this.http.get('http://localhost:5000/groups');
+  getGroups(grplist) {
+    return this.http.get('http://localhost:5000/groups', grplist);
   }
   newGroup(group: any) {
     console.log(group);

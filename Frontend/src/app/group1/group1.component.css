@@ -78,6 +78,18 @@ a[aria-expanded="true"] {
   background-color: var(--light-color);
   border-radius: 5px;
 }
+#message {
+  display: none;
+}
+
+.dropdown-menu {
+  position: absolute;
+  left: 0;
+  padding: 0;
+  margin: 0;
+  margin-top: 3px;
+  text-align: left;
+}
 
 .chat-messages .message .meta {
   font-size: 15px;

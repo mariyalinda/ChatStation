@@ -8,11 +8,16 @@
   overflow-y: scroll;
 }
 
+#button-div {
+  text-align: center;
+}
 .btn {
   background-color: #ecb390;
-  margin-right: 20%;
 }
 
 .fa {
   color: #ecb390;
+}
+.list ul {
+  list-style-type: none;
 }

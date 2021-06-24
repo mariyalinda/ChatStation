@@ -109,9 +109,22 @@ app.get("/groups/msg/:id", (req, res) => {
   });
 });
 app.get("/groups", (req, res) => {
-  Grpdata.find().then(function (groups) {
-    res.send(groups);
+  console.log(req.body);
+  var grplist = req.body.grplist;
+  var groups = [
+    {
+      des: "",
+      memno: "",
+      members: [],
+      name: "",
+    },
+  ];
+  grplist.forEach((grp) => {
+    Grpdata.findOne({ _id: grp.id }).then(function (group) {
+      groups.push(group);
+    });
   });
+  res.send(groups);
 });
 app.get("/users", (req, res) => {
   Userdata.find().then(function (users) {
@@ -252,13 +265,26 @@ app.post("/login", (req, res) => {
   );
 });
 app.post("/addgrp", verifyToken, function (req, res) {
-  var group = {
+  var grp = {
     name: req.body.name,
     des: req.body.des,
     memno: req.body.memno,
     members: req.body.members,
   };
-  var group = new Grpdata(group);
+  var group = new Grpdata(grp);
+  grp.members.forEach((user) => {
+    Userdata.findOne({ username: user })
+      .then(function (user) {
+        var usergrp = {};
+        usergrp["id"] = group._id;
+        usergrp["name"] = group.name;
+        user.groups.push(usergrp);
+        user.save();
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  });
   group
     .save()
     .then(function () {
