@@ -108,24 +108,6 @@ app.get("/groups/msg/:id", (req, res) => {
     res.send(grpchat);
   });
 });
-app.get("/groups", (req, res) => {
-  console.log(req.body);
-  var grplist = req.body.grplist;
-  var groups = [
-    {
-      des: "",
-      memno: "",
-      members: [],
-      name: "",
-    },
-  ];
-  grplist.forEach((grp) => {
-    Grpdata.findOne({ _id: grp.id }).then(function (group) {
-      groups.push(group);
-    });
-  });
-  res.send(groups);
-});
 app.get("/users", (req, res) => {
   Userdata.find().then(function (users) {
     res.send(users);
@@ -226,6 +208,28 @@ function verifyToken(req, res, next) {
 }
 
 //POST REQUESTS
+
+app.post("/groups", (req, res) => {
+  const grplist = req.body;
+
+  if (grplist.length == 0) {
+    res.send(error);
+  } else {
+    const groups = [];
+    for (var i = 0; i < grplist.length; i++) {
+      Grpdata.findOne({ _id: grplist[i].id })
+        .then(function (group) {
+          groups.push(group);
+          if (groups.length == grplist.length) {
+            res.send(groups);
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+  }
+});
 app.post("/signup", (req, res) => {
   var newuser = {
     username: req.body.uname,

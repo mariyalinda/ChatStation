@@ -27,9 +27,15 @@ export class GroupsComponent implements OnInit {
     this.id = localStorage.getItem('userid');
     this.userservice.getUser(this.id).subscribe((data) => {
       this.current_user = JSON.parse(JSON.stringify(data));
-      this.grpservice.getGroups(this.current_user.groups).subscribe((data) => {
-        this.grps = JSON.parse(JSON.stringify(data));
-      });
+      this.grpservice.getGroups(this.current_user.groups).subscribe(
+        (groups) => {
+          this.grps = <any>groups;
+        },
+        (err) => {
+          alert('No groups');
+          console.log(err);
+        }
+      );
     });
   }
 }
