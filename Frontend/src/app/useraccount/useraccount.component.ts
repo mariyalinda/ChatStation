@@ -25,4 +25,21 @@ export class UseraccountComponent implements OnInit {
       this.current_user = JSON.parse(JSON.stringify(data));
     });
   }
+  changepw() {
+    var newpw = prompt('Enter new password');
+    if (/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d].{8,}$/.test(newpw)) {
+      this.current_user.password = newpw;
+      this.userservice.updatePassword(this.current_user).subscribe(
+        () => {
+          alert('Succesful!');
+        },
+        (err) => {
+          alert('Enter unique password!');
+          console.log(err);
+        }
+      );
+    } else {
+      alert('Must have atleast 8 characters,including a letter and a number');
+    }
+  }
 }

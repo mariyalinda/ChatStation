@@ -50,7 +50,8 @@ export class Group1Component implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // alert('Please wait for 5 seconds before sending new messages');
+    // alert('Please wait for 5 seconds'); helped in getting correct info
+
     //get details
     this.grpid = this.route.snapshot.params['id'];
     this.grpservice.getGroup(this.grpid).subscribe((data) => {
@@ -62,11 +63,10 @@ export class Group1Component implements OnInit {
       this.user = JSON.parse(JSON.stringify(data));
       this.grpuser.username = this.user.username;
     });
-    //by putting .then(), setupsocket() not working
-    // this.getOldMessages(this.grpuser, this.setupSocketConnection(this.grpuser));
+    //by putting making it async (and using .then()), setupsocketconnection() not working
 
     this.getOldMessages();
-    // this.setupSocketConnection();
+    this.setupSocketConnection();
   }
 
   getOldMessages() {
@@ -136,13 +136,3 @@ export class Group1Component implements OnInit {
   }
 }
 //its passing correct value to server only after a time delay
-// public ngAfterViewInit() {
-//   // Solution for catching click events on anchors using querySelectorAll:
-//   this.msgs = document.querySelectorAll('#message');
-//   this.msgs.forEach((anchor: HTMLAnchorElement) => {
-//     anchor.addEventListener('click', this.dropdown);
-//   });
-
-// dropdown() {
-//   document.getElementById('message').style.display = 'block';
-// }

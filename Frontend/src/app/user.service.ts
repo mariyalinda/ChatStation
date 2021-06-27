@@ -16,6 +16,9 @@ export class UserService {
   getUser(id) {
     return this.http.get('http://localhost:5000/user/' + id);
   }
+  updatePassword(user) {
+    return this.http.post('http://localhost:5000/user/update', user);
+  }
   blockUser(currentuser_id, vieweduser_id) {
     return this.http.get(
       'http://localhost:5000/user/' + currentuser_id + '/block/' + vieweduser_id

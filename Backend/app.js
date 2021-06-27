@@ -362,6 +362,21 @@ app.post("/groups/:id/addmsg", function (req, res) {
       console.log(err);
     });
 });
+app.post("/user/update", (req, res) => {
+  var user = {
+    username: req.body.username,
+    email: req.body.email,
+    password: req.body.password,
+    groups: req.body.groups,
+    blocked: req.body.blocked,
+    muted: req.body.muted,
+  };
+  Userdata.updateOne({ username: user.username }, { $set: user }).catch(
+    function (error) {
+      res.send(error);
+    }
+  );
+});
 http.listen(5000, function () {
   console.log("Listening on port", 5000);
 });
