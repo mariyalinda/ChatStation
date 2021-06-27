@@ -102,6 +102,41 @@ app.get("/groups/:id", (req, res) => {
     res.send(group);
   });
 });
+app.get("/groups/:id1/delete/:id2", (req, res) => {
+  const grpid = req.params.id1;
+  const userid = req.params.id2;
+  Grpdata.findOne({ _id: grpid })
+    .then((group) => {
+      Userdata.findOne({ _id: userid })
+        .then((user) => {
+          //remove from group database
+          var result = group.members.filter(
+            (member) => member != user.username
+          );
+          group.members = result;
+          group.save();
+          //remove from users database
+          result = user.groups.filter((group) => group.id != grpid);
+          user.groups = result;
+          user.save();
+          if (group.members.length == 0) {
+            //delete group
+            Grpdata.deleteOne({ _id: grpid }).then(function () {
+              Msgdata.deleteOne({ groupid: grpid }).then(function () {
+                res.send({ message: "Group deleted" });
+              });
+            });
+            res.send({ message: "Succesfully left" });
+          }
+        })
+        .catch(function (error) {
+          res.send(error);
+        });
+    })
+    .catch(function (error) {
+      res.send(error);
+    });
+});
 app.get("/groups/msg/:id", (req, res) => {
   const grpid = req.params.id;
   Msgdata.findOne({ groupid: grpid }).then((grpchat) => {
@@ -211,9 +246,8 @@ function verifyToken(req, res, next) {
 
 app.post("/groups", (req, res) => {
   const grplist = req.body;
-
   if (grplist.length == 0) {
-    res.send(error);
+    res.send({ message: "No groups" });
   } else {
     const groups = [];
     for (var i = 0; i < grplist.length; i++) {
@@ -221,11 +255,11 @@ app.post("/groups", (req, res) => {
         .then(function (group) {
           groups.push(group);
           if (groups.length == grplist.length) {
-            res.send(groups);
+            res.send({ message: groups });
           }
         })
         .catch(function (error) {
-          console.log(error);
+          res.send(error);
         });
     }
   }

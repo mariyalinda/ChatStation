@@ -28,11 +28,14 @@ export class GroupsComponent implements OnInit {
     this.userservice.getUser(this.id).subscribe((data) => {
       this.current_user = JSON.parse(JSON.stringify(data));
       this.grpservice.getGroups(this.current_user.groups).subscribe(
-        (groups) => {
-          this.grps = <any>groups;
+        (res) => {
+          if (res.message == 'No groups') {
+            alert('No groups');
+          } else {
+            this.grps = <any>res.message;
+          }
         },
         (err) => {
-          alert('No groups');
           console.log(err);
         }
       );

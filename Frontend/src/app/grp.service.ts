@@ -15,6 +15,11 @@ export class GrpService {
   getGroup(id) {
     return this.http.get('http://localhost:5000/groups/' + id);
   }
+  delGroup(grpid, userid) {
+    return this.http.get(
+      'http://localhost:5000/groups/' + grpid + '/delete/' + userid
+    );
+  }
   getMessages(grpid) {
     return this.http.get('http://localhost:5000/groups/msg/' + grpid);
   }

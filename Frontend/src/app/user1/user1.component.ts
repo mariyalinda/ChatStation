@@ -43,13 +43,11 @@ export class User1Component implements OnInit {
     this.userservice.getUser(this.current_id).subscribe((data) => {
       this.current_user = JSON.parse(JSON.stringify(data));
       this.current_user.blocked.forEach((person) => {
-        console.log('yes');
         if (person.id == this.viewed_id) {
           this.isBlocked = true;
         }
       });
       this.current_user.muted.forEach((person) => {
-        console.log('yes');
         if (person.id == this.viewed_id) {
           this.isMuted = true;
         }

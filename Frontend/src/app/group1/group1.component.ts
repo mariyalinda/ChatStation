@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { GrpService } from '../grp.service';
 import { UserService } from '../user.service';
 import { io } from 'socket.io-client';
@@ -44,7 +45,8 @@ export class Group1Component implements OnInit {
   constructor(
     private route: ActivatedRoute,
     public grpservice: GrpService,
-    public userservice: UserService
+    public userservice: UserService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -64,7 +66,7 @@ export class Group1Component implements OnInit {
     // this.getOldMessages(this.grpuser, this.setupSocketConnection(this.grpuser));
 
     this.getOldMessages();
-    this.setupSocketConnection();
+    // this.setupSocketConnection();
   }
 
   getOldMessages() {
@@ -74,7 +76,7 @@ export class Group1Component implements OnInit {
       this.messages.messages.forEach((object) => {
         var div = document.createElement('div');
         div.classList.add('message');
-        div.innerHTML = `<p id="message" class="meta">${object.sender}<span>${object.time}</span><span>▼</span></p>
+        div.innerHTML = `<p class="meta">${object.sender}<span>${object.time}</span><span>▼</span></p>
           <p class="text">${object.text}</p>`;
         var chatMessages = document.querySelector('.chat-messages');
         chatMessages.appendChild(div);
@@ -92,7 +94,7 @@ export class Group1Component implements OnInit {
     this.socket.on('message', (message) => {
       var div = document.createElement('div');
       div.classList.add('message'); //add class message
-      div.innerHTML = `<p id="message" class="meta">${message.username}<span>${message.time}</span><span>▼</span></p>
+      div.innerHTML = `<p class="meta">${message.username}<span>${message.time}</span><span>▼</span></p>
       <ul class="dropdown-menu">
       <li><a href="#">Copy</a></li>
       <li><a href="#">Forward</a></li>
@@ -120,15 +122,27 @@ export class Group1Component implements OnInit {
       (event.target as HTMLInputElement)[0].focus();
     });
   }
-  //its passing correct value to server only after a time delay
-  public ngAfterViewInit() {
-    // Solution for catching click events on anchors using querySelectorAll:
-    this.msgs = document.querySelectorAll('#message');
-    this.msgs.forEach((anchor: HTMLAnchorElement) => {
-      anchor.addEventListener('click', this.dropdown);
-    });
-  }
-  dropdown() {
-    document.getElementById('message').style.display = 'block';
+  deletegrp() {
+    this.grpservice.delGroup(this.grpid, this.userid).subscribe(
+      (res) => {
+        console.log(res);
+        alert(`You left ${this.group.name}`);
+        this.router.navigate(['/groups']);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 }
+//its passing correct value to server only after a time delay
+// public ngAfterViewInit() {
+//   // Solution for catching click events on anchors using querySelectorAll:
+//   this.msgs = document.querySelectorAll('#message');
+//   this.msgs.forEach((anchor: HTMLAnchorElement) => {
+//     anchor.addEventListener('click', this.dropdown);
+//   });
+
+// dropdown() {
+//   document.getElementById('message').style.display = 'block';
+// }
