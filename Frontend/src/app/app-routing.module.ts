@@ -17,10 +17,10 @@ const routes: Routes = [
   { path: '', component: WelcomeComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'signin', component: SigninComponent },
-  { path: 'home', canActivate: [AuthGuard], component: HomeComponent },
+  { path: 'home', component: HomeComponent },
   {
     path: 'home/:id',
-    canActivate: [AuthGuard],
+
     component: User1Component,
     pathMatch: 'full',
   },
@@ -84,8 +84,8 @@ const routes: Routes = [
     component: ConfirmComponent,
     pathMatch: 'full',
   },
-  { path: 'groups', canActivate: [AuthGuard], component: GroupsComponent },
-  { path: 'groups/:id', canActivate: [AuthGuard], component: Group1Component },
+  { path: 'groups', component: GroupsComponent },
+  { path: 'groups/:id', component: Group1Component },
   { path: 'addgrp', canActivate: [AuthGuard], component: AddgrpComponent },
 ];
 

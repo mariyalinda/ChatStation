@@ -31,6 +31,7 @@ export class GroupsComponent implements OnInit {
       this.grpservice.getGroups(this.current_user.groups).subscribe(
         (res) => {
           if (res.message == 'No groups') {
+            this.grps.length = 0;
             alert('No groups');
           } else {
             this.grps = <any>res.message;
