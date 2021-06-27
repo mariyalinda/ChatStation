@@ -2,9 +2,9 @@
   <app-navbar-home></app-navbar-home>
   <main>
     <header>
-      <input type="text" placeholder="Search" />
+      <input type="text" id="myInput" placeholder="Search" />
     </header>
-    <ul>
+    <ul id="myDIV">
       <li *ngFor="let group of grps">
         <a [routerLink]="[group._id]">
           <h5>{{ group.name }}</h5>

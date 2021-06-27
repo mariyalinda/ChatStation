@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GrpService } from '../grp.service';
 import { UserService } from '../user.service';
 
+declare var $: any;
 @Component({
   selector: 'app-groups',
   templateUrl: './groups.component.html',
@@ -39,6 +40,14 @@ export class GroupsComponent implements OnInit {
           console.log(err);
         }
       );
+    });
+    $(document).ready(function () {
+      $('#myInput').on('keyup', function () {
+        var value = $(this).val().toLowerCase();
+        $('#myDIV *').filter(function () {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+        });
+      });
     });
   }
 }
