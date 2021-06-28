@@ -20,7 +20,6 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   {
     path: 'home/:id',
-
     component: User1Component,
     pathMatch: 'full',
   },

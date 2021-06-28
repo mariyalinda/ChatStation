@@ -122,9 +122,13 @@ app.get("/groups/:id1/delete/:id2", (req, res) => {
           if (group.members.length == 0) {
             //delete group
             Grpdata.deleteOne({ _id: grpid }).then(function () {
-              Msgdata.deleteOne({ groupid: grpid }).then(function () {
-                res.send({ message: "Group deleted" });
-              });
+              Msgdata.deleteOne({ groupid: grpid })
+                .then(function () {
+                  res.send({ message: "Group deleted" });
+                })
+                .catch(function (error) {
+                  console.log(error);
+                });
             });
             res.send({ message: "Succesfully left" });
           }
